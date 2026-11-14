@@ -94,17 +94,26 @@ powershell -ExecutionPolicy Bypass -File .\tools\send_cmd.ps1 fc spawn BP_Item_K
 | | Что делает | Размер | Где взять |
 |---|---|---|---|
 | `FeatherCageCheats-Setup-1.0.0.exe` | ставит **мод** в уже установленную игру (UE4SS + мод + конфиг) | 7 МБ | [Releases](https://github.com/gemerte/HNRenovated-all-possibilities/releases) или `installer/dist/` |
-| `FeatherCageCheats-Full-Setup-1.0.0.exe` | ставит **игру целиком вместе с модом**: поставил → играешь | ~0.8 ГБ | собирается локально: `installer\build_full.ps1` |
+| `FeatherCageCheats-Full-Setup-1.0.0.exe` | ставит **игру целиком вместе с модом**: поставил → играешь | ~0.8 ГБ | [Releases → v1.0.0-full](https://github.com/gemerte/HNRenovated-all-possibilities/releases/tag/v1.0.0-full) или собирается локально `installer\build_full.ps1` |
 
-Полный установщик не лежит в репозитории, потому что GitHub не принимает файлы больше 100 МБ
-(в игре есть pak на 421 МБ). Соберите его у себя и выложите на любой файлообменник:
+Полный установщик лежит в **Releases** (там лимит 2 ГБ на файл), а не в git-репозитории —
+GitHub не принимает в репозиторий файлы больше 100 МБ (в игре есть pak на 421 МБ).
+Собрать его самому:
 
 ```powershell
 .\installer\build_full.ps1 -GameDir "C:\Users\Dmitriy\Desktop\Project FeatherCage"
 # -> installer\dist\FeatherCageCheats-Full-Setup-1.0.0.exe
 ```
 
-### Вариант 1 — только мод (игра уже есть)
+### Вариант 1 — игра + мод (полный установщик)
+
+Скачать **`FeatherCageCheats-Full-Setup-1.0.0.exe`** из
+[Releases → v1.0.0-full](https://github.com/gemerte/HNRenovated-all-possibilities/releases/tag/v1.0.0-full),
+запустить, выбрать папку (по умолчанию `C:\Program Files\Project FeatherCage`) → «Установить».
+На рабочем столе появится ярлык **Project FeatherCage (with cheats)** — мод уже включён, можно играть.
+Удаление — через «Программы и компоненты».
+
+### Вариант 2 — только мод (игра уже есть)
 
 Скачать **`FeatherCageCheats-Setup-1.0.0.exe`** из [Releases](https://github.com/gemerte/HNRenovated-all-possibilities/releases)
 (или взять из `installer/dist/`) и запустить. Если игра лежит на рабочем столе, папка определится сама,
