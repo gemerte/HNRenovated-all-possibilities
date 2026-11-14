@@ -89,7 +89,22 @@ powershell -ExecutionPolicy Bypass -File .\tools\send_cmd.ps1 fc spawn BP_Item_K
 
 ## Установка
 
-### Вариант 1 — установщик (проще всего)
+Есть два установщика — выбирайте по ситуации.
+
+| | Что делает | Размер | Где взять |
+|---|---|---|---|
+| `FeatherCageCheats-Setup-1.0.0.exe` | ставит **мод** в уже установленную игру (UE4SS + мод + конфиг) | 7 МБ | [Releases](https://github.com/gemerte/HNRenovated-all-possibilities/releases) или `installer/dist/` |
+| `FeatherCageCheats-Full-Setup-1.0.0.exe` | ставит **игру целиком вместе с модом**: поставил → играешь | ~0.8 ГБ | собирается локально: `installer\build_full.ps1` |
+
+Полный установщик не лежит в репозитории, потому что GitHub не принимает файлы больше 100 МБ
+(в игре есть pak на 421 МБ). Соберите его у себя и выложите на любой файлообменник:
+
+```powershell
+.\installer\build_full.ps1 -GameDir "C:\Users\Dmitriy\Desktop\Project FeatherCage"
+# -> installer\dist\FeatherCageCheats-Full-Setup-1.0.0.exe
+```
+
+### Вариант 1 — только мод (игра уже есть)
 
 Скачать **`FeatherCageCheats-Setup-1.0.0.exe`** из [Releases](https://github.com/gemerte/HNRenovated-all-possibilities/releases)
 (или взять из `installer/dist/`) и запустить. Если игра лежит на рабочем столе, папка определится сама,
@@ -166,8 +181,12 @@ GuiConsoleVisible = 1
 ```
 mod/FeatherCageCheats/Scripts/main.lua   сам мод (весь код)
 deploy.ps1                               установка/обновление в игру (PowerShell)
-installer/                               исходник установщика (Inno Setup) + build.ps1
-  dist/FeatherCageCheats-Setup-*.exe     готовый установщик
+installer/                               установщики (Inno Setup)
+  FeatherCageCheats.iss                  мод для уже установленной игры
+  FeatherCageCheats-Full.iss             игра + мод целиком
+  build.ps1 / build_full.ps1             сборка
+  dist/FeatherCageCheats-Setup-*.exe     готовый установщик мода (в репозитории)
+  dist/FeatherCageCheats-Full-Setup-*.exe  полный установщик (~0.8 ГБ, не в репозитории)
 vendor/UE4SS_v4.0.0/                     UE4SS v4.0.0 (dwmapi.dll + ue4ss\), кладётся установщиком
 tools/                                   автоматизация и отладка (PowerShell/Python)
   send_cmd.ps1       команда в файловую очередь

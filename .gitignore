@@ -4,3 +4,7 @@
 
 __pycache__/
 *.pyc
+
+# The "game + mod" installer is ~0.8 GB; GitHub rejects files > 100 MB.
+# Build it locally: installer\build_full.ps1
+installer/dist/FeatherCageCheats-Full-Setup-*.exe
