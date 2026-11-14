@@ -1,20 +1,6 @@
-# UE4SS binaries / archives (download separately, see README)
-vendor/
+# Everything in this project is committed on purpose (mod, tools, UE4SS copy,
+# generated dumps, screenshots and the compiled installer).
+# Only Python bytecode is ignored.
 
-# Generated dumps (the mod rebuilds them in-game)
-actor_classes.txt
-item_candidates.txt
-world_actors.txt
-
-# Local debugging artifacts
-tools/*.png
-tools/mock_err.txt
-*.log
 __pycache__/
 *.pyc
-
-# Editor / OS noise
-.vscode/
-.idea/
-Thumbs.db
-desktop.ini

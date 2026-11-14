@@ -89,7 +89,28 @@ powershell -ExecutionPolicy Bypass -File .\tools\send_cmd.ps1 fc spawn BP_Item_K
 
 ## Установка
 
-### 1. UE4SS
+### Вариант 1 — установщик (проще всего)
+
+Скачать **`FeatherCageCheats-Setup-1.0.0.exe`** из [Releases](https://github.com/gemerte/HNRenovated-all-possibilities/releases)
+(или взять из `installer/dist/`) и запустить. Если игра лежит на рабочем столе, папка определится сама,
+иначе укажите её вручную — это корень, где находятся `HNRenovated` и `Project Feathercage.exe`.
+
+Установщик делает всё сам:
+
+- `dwmapi.dll` + папку `ue4ss\` → `HNRenovated\Binaries\Win64\`
+- включает консоль UE4SS в `UE4SS-settings.ini`
+- копирует мод в `ue4ss\Mods\FeatherCageCheats\`
+- прописывает `FeatherCageCheats : 1` в `mods.txt` (перед `Keybinds`, без дублей)
+- существующие `UE4SS-settings.ini` и `mods.txt` не затирает, только дополняет
+
+Удаление — обычное, через «Программы и компоненты»; настройки UE4SS при этом остаются.
+
+Пересобрать установщик: `installer\build.ps1` (нужен [Inno Setup 6](https://jrsoftware.org/isinfo.php),
+`winget install JRSoftware.InnoSetup`).
+
+### Вариант 2 — вручную
+
+#### 1. UE4SS
 
 Нужен [UE4SS v4.0.0](https://github.com/UE4SS-RE/RE-UE4SS/releases) (Lua API, UE 4.27).
 
@@ -105,13 +126,13 @@ powershell -ExecutionPolicy Bypass -File .\tools\send_cmd.ps1 fc spawn BP_Item_K
 В `UE4SS-settings.ini` включить консоль (по желанию, но с ней удобнее):
 
 ```ini
-[ConsoleVariables]
+[Debug]
 ConsoleEnabled = 1
 GuiConsoleEnabled = 1
 GuiConsoleVisible = 1
 ```
 
-### 2. Мод
+#### 2. Мод
 
 ```powershell
 # путь к игре можно не указывать, если она лежит на рабочем столе
@@ -124,7 +145,7 @@ GuiConsoleVisible = 1
 
 Запустить игру. В логе `ue4ss\UE4SS.log` должно появиться `[FeatherCage] mod loaded`.
 
-### 3. Горячая перезагрузка
+#### 3. Горячая перезагрузка
 
 Окно **UE4SS Debugging Tools** → кнопка **Restart All Mods**. Перезапускать игру не нужно.
 
@@ -144,7 +165,10 @@ GuiConsoleVisible = 1
 
 ```
 mod/FeatherCageCheats/Scripts/main.lua   сам мод (весь код)
-deploy.ps1                               установка/обновление в игру
+deploy.ps1                               установка/обновление в игру (PowerShell)
+installer/                               исходник установщика (Inno Setup) + build.ps1
+  dist/FeatherCageCheats-Setup-*.exe     готовый установщик
+vendor/UE4SS_v4.0.0/                     UE4SS v4.0.0 (dwmapi.dll + ue4ss\), кладётся установщиком
 tools/                                   автоматизация и отладка (PowerShell/Python)
   send_cmd.ps1       команда в файловую очередь
   gui_click.ps1      надёжный клик по кнопке в окне UE4SS
